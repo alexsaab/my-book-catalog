@@ -38,19 +38,4 @@ class m250214_215348_create_books_and_authors_tables extends Migration
         $this->dropTable('{{%authors}}');
         $this->dropTable('{{%books}}');
     }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m250214_215348_create_books_and_authors_tables cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }

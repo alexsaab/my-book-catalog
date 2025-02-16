@@ -27,6 +27,9 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
         ],
     ];
 
+    const ROLE_GUEST = 10;
+    const ROLE_USER = 20;
+    const ROLE_ADMIN = 30;
 
     /**
      * {@inheritdoc}
@@ -99,6 +102,6 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      */
     public function validatePassword($password)
     {
-        return $this->password === $password;
+        return $this->password === hash('sha256', $password);
     }
 }
