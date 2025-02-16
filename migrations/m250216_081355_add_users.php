@@ -12,9 +12,9 @@ class m250216_081355_add_users extends Migration
     {
         $this->insert('{{%user}}', [
             'username' => 'admin',
-            'password_hash' =>  hash('sha256','admin'),
+            'password_hash' => Yii::$app->security->generatePasswordHash('admin'),
             'email' => 'cRgZP@example.com',
-            'auth_key' => 'test1key',
+            'auth_key' => Yii::$app->security->generateRandomString(),
             'status' => 1,
             'role' => User::ROLE_ADMIN,
             'created_at' => time(),
@@ -23,9 +23,9 @@ class m250216_081355_add_users extends Migration
 
         $this->insert('{{%user}}', [
             'username' => 'user',
-            'password_hash' =>  hash('sha256','user'),
+            'password_hash' =>  Yii::$app->security->generatePasswordHash('user'),
             'email' => 'Oo8gK@example.com',
-            'auth_key' => 'test2key',
+            'auth_key' => Yii::$app->security->generateRandomString(),
             'status' => 1,
             'role' => User::ROLE_USER,
             'created_at' => time(),
@@ -34,9 +34,9 @@ class m250216_081355_add_users extends Migration
 
         $this->insert('{{%user}}', [
             'username' => 'guest',
-            'password_hash' =>  hash('sha256','guest'),
+            'password_hash' =>  Yii::$app->security->generatePasswordHash('guest'),
             'email' => 'Oo821e@example.com',
-            'auth_key' => 'test3key',
+            'auth_key' => Yii::$app->security->generateRandomString(),
             'status' => 1,
             'role' => User::ROLE_GUEST,
             'created_at' => time(),

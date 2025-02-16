@@ -64,19 +64,4 @@ class m250216_095532_insert_data_into_authors_and_books_tables extends Migration
 
         return false;
     }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m250216_095532_insert_data_into_authors_and_books_tables cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }
