@@ -1,0 +1,31 @@
+services:
+  php:
+    image: yiisoftware/yii2-php:7.4-apache
+    volumes:
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      - ./:/app:delegated
+    ports:
+      - '8000:80'
+    networks:
+      - my-network
+
+  mysql:
+    platform: linux/x86_64
+    image: mysql:8.1
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: my_book_catalog
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - '3306:3306'php yii migrate/create create_books_and_authors_tables
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - my-network
+      
+networks:
+  my-network:
+
+volumes:
+  mysql_data:
