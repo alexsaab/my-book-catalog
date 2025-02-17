@@ -15,7 +15,7 @@ class m250216_081355_add_users extends Migration
             'password_hash' => Yii::$app->security->generatePasswordHash('admin'),
             'email' => 'cRgZP@example.com',
             'auth_key' => Yii::$app->security->generateRandomString(),
-            'status' => 1,
+            'status' => User::STATUS_ACTIVE,
             'role' => User::ROLE_ADMIN,
             'created_at' => time(),
             'updated_at' => time()
@@ -26,7 +26,7 @@ class m250216_081355_add_users extends Migration
             'password_hash' =>  Yii::$app->security->generatePasswordHash('user'),
             'email' => 'Oo8gK@example.com',
             'auth_key' => Yii::$app->security->generateRandomString(),
-            'status' => 1,
+            'status' => User::STATUS_ACTIVE,
             'role' => User::ROLE_USER,
             'created_at' => time(),
             'updated_at' => time()
@@ -37,7 +37,7 @@ class m250216_081355_add_users extends Migration
             'password_hash' =>  Yii::$app->security->generatePasswordHash('guest'),
             'email' => 'Oo821e@example.com',
             'auth_key' => Yii::$app->security->generateRandomString(),
-            'status' => 1,
+            'status' => User::STATUS_ACTIVE,
             'role' => User::ROLE_GUEST,
             'created_at' => time(),
             'updated_at' => time()

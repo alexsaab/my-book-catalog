@@ -2,44 +2,71 @@
 
 namespace app\controllers;
 
+use Yii;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use app\models\Book;
+use app\models\search\BookSearch;
 
 class BookController extends Controller
 {
     public function actionIndex()
     {
-        $books = Book::find()->all();
-        return $this->render('index', ['books' => $books]);
+        $searchModel = new BookSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     public function actionView($id)
     {
-        $book = Book::findOne($id);
-        return $this->render('view', ['book' => $book]);
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
     }
 
     public function actionCreate()
     {
-        $book = new Book();
-        if ($book->load(Yii::$app->request->post()) && $book->save()) {
-            return $this->redirect(['view', 'id' => $book->id]);
+        $model = new Book();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
-        return $this->render('create', ['book' => $book]);
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     public function actionUpdate($id)
     {
-        $book = Book::findOne($id);
-        if ($book->load(Yii::$app->request->post()) && $book->save()) {
-            return $this->redirect(['view', 'id' => $book->id]);
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
-        return $this->render('update', ['book' => $book]);
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     public function actionDelete($id)
     {
-        Book::findOne($id)->delete();
+        $this->findModel($id)->delete();
+
         return $this->redirect(['index']);
+    }
+
+    protected function findModel($id)
+    {
+        if (($model = Book::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
