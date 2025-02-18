@@ -30,7 +30,13 @@ class m250216_095532_insert_data_into_authors_and_books_tables extends Migration
             ['title' => 'Книга 11', 'year' => 2020, 'description' => 'Описание книги 11', 'isbn' => '1234567890', 'photo' => 'https://example.com/book11.jpg'],
             ['title' => 'Книга 12', 'year' => 2021, 'description' => 'Описание книги 12', 'isbn' => '2345678901', 'photo' => 'https://example.com/book12.jpg'],
             ['title' => 'Книга 13', 'year' => 2022, 'description' => 'Описание книги 13', 'isbn' => '3456789012', 'photo' => 'https://example.com/book13.jpg'],
-            ['title' => 'Книга 14', 'year' => 2023, 'description' => 'Описание книги 14', 'isbn' => '4567890123', 'photo' => 'https://example.com/book14.jpg'],
+            ['title' => 'Книга 14', 'year' => 2023, 'description' => 'Описание книги 14', 'isbn' => '4567893234', 'photo' => 'https://example.com/book14.jpg'],
+            ['title' => 'Книга 15', 'year' => 2020, 'description' => 'Описание книги 15', 'isbn' => '4567894342', 'photo' => 'https://example.com/book15.jpg'],
+            ['title' => 'Книга 16', 'year' => 2020, 'description' => 'Описание книги 16', 'isbn' => '4567834343', 'photo' => 'https://example.com/book16.jpg'],
+            ['title' => 'Книга 17', 'year' => 2021, 'description' => 'Описание книги 17', 'isbn' => '4567895435', 'photo' => 'https://example.com/book17.jpg'],
+            ['title' => 'Книга 18', 'year' => 2021, 'description' => 'Описание книги 18', 'isbn' => '4567890567', 'photo' => 'https://example.com/book18.jpg'],
+            ['title' => 'Книга 19', 'year' => 2022, 'description' => 'Описание книги 19', 'isbn' => '4567890234', 'photo' => 'https://example.com/book19.jpg'],
+            ['title' => 'Книга 20', 'year' => 2024, 'description' => 'Описание книги 20', 'isbn' => '4567890233', 'photo' => 'https://example.com/book20.jpg'],
         ];
 
         $bookAuthors = [
@@ -48,6 +54,12 @@ class m250216_095532_insert_data_into_authors_and_books_tables extends Migration
             ['book_id' => 12, 'author_id' => 4],
             ['book_id' => 13, 'author_id' => 1],
             ['book_id' => 14, 'author_id' => 2],
+            ['book_id' => 15, 'author_id' => 1],
+            ['book_id' => 16, 'author_id' => 1],
+            ['book_id' => 17, 'author_id' => 2],
+            ['book_id' => 18, 'author_id' => 3],
+            ['book_id' => 19, 'author_id' => 2],
+            ['book_id' => 20, 'author_id' => 3],
         ];
 
         $this->batchInsert('{{%authors}}',['full_name'], array_values($authors));

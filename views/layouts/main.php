@@ -40,10 +40,13 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Authors', 'url' => ['/author/index']],
             ['label' => 'Books', 'url' => ['/book/index']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Top authors 2020', 'url' => ['/author/top-authors-by-year/2020']],
+            ['label' => 'Top authors 2021', 'url' => ['/author/top-authors-by-year/2021']],
+            ['label' => 'Top authors 2022', 'url' => ['/author/top-authors-by-year/2022']],
+            ['label' => 'Top authors 2023', 'url' => ['/author/top-authors-by-year/2023']],
+            ['label' => 'Top authors 2024', 'url' => ['/author/top-authors-by-year/2024']],
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/site/login']]
                 : '<li class="nav-item">'

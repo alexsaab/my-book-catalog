@@ -6,8 +6,9 @@ use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
-/** @var yii\web\View $this */
-/** @var yii\data\ActiveDataProvider $dataProvider */
+/* @var $this yii\web\View */
+/* @var $searchModel app\models\search\AuthorSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Authors';
 $this->params['breadcrumbs'][] = $this->title;
@@ -23,17 +24,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'full_name',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Author $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
+            'book_count', // Добавляем столбец "Количество книг у автора"
+
+            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 

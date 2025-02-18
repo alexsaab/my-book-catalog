@@ -2,8 +2,9 @@
 
 namespace app\controllers;
 
+use Yii;
+use app\models\search\AuthorSearch;
 use yii\data\ActiveDataProvider;
-use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use app\models\Author;
@@ -36,21 +37,16 @@ class AuthorController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Author::find(),
-            /*
-            'pagination' => [
-                'pageSize' => 50
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'id' => SORT_DESC,
-                ]
-            ],
-            */
-        ]);
+        $searchModel = new AuthorSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        // Добавляем подсчет количества книг для каждого автора
+        foreach ($dataProvider->models as $key=>$author) {
+            $author->book_count = count($author->books);
+        }
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -138,5 +134,30 @@ class AuthorController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * Report top authors by year
+     * @param $year
+     * @return string
+     */
+    public function actionTopAuthorsByYear($year)
+    {
+        $query = Author::find()
+            ->select('authors.id, authors.full_name, COUNT(books.id) as book_count')
+            ->joinWith('books')
+            ->where(['books.year' => $year])
+            ->groupBy('authors.id')
+            ->orderBy('book_count DESC')
+            ->limit(10);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        return $this->render('top-authors-by-year', [
+            'year' => $year,
+            'authors' => $dataProvider,
+        ]);
     }
 }

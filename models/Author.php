@@ -6,6 +6,8 @@ use yii\db\ActiveRecord;
 
 class Author extends ActiveRecord
 {
+    public $book_count;
+
     public static function tableName()
     {
         return 'authors';

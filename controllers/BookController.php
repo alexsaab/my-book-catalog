@@ -15,6 +15,11 @@ class BookController extends Controller
         $searchModel = new BookSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        // Добавляем автора к саждой книге
+        foreach ($dataProvider->models as $key=>$book) {
+            $book->author_full_name = $book->author->full_name;
+        }
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
