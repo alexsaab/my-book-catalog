@@ -17,17 +17,18 @@ class AuthorController extends Controller
      */
     public function behaviors()
     {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['author/index', 'author/view', 'author/create', 'author/update',
+                            'author/delete', 'author/subscribe', 'author/unsubscribe'],
                     ],
                 ],
-            ]
-        );
+            ],
+        ];
     }
 
     /**
@@ -116,6 +117,21 @@ class AuthorController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
+    }
+
+    public function actionSubscribe($id)
+    {
+        $this->findModel($id)->subscribe(Yii::app()->user->getId());
+
+        return $this->redirect(['index']);
+    }
+
+
+    public function actionUnsubscribe($id)
+    {
+        $this->findModel($id)->unSubscribe(Yii::app()->user->getId());
 
         return $this->redirect(['index']);
     }

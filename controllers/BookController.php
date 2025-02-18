@@ -10,6 +10,22 @@ use app\models\search\BookSearch;
 
 class BookController extends Controller
 {
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => \yii\filters\AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['author/index', 'author/view', 'author/create', 'author/update', 'author/delete'],
+                    ],
+                ],
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         $searchModel = new BookSearch();
