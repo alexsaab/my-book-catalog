@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -23,6 +24,10 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'isbn')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'photo')->textInput(['maxlength' => true]) ?>
+
+    <?php $items = ArrayHelper::map(\app\models\Author::find()->all(), 'id', 'full_name'); ?>
+
+    <?= $form->field($model, 'author')->dropDownList($items) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

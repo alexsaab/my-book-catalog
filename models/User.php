@@ -215,4 +215,15 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+
+    /**
+     * Подписка на авторов
+     * @return void
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function getAuthors()
+    {
+        $this->hasMany(Author::className(), ['id' => 'author_id'])->viaTable('user_authors', ['user_id' => 'id']);
+    }
 }

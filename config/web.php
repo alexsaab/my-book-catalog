@@ -18,8 +18,12 @@ $config = [
     ],
     'components' => [
         'authManager' => [
-            'class' => 'yii\rbac\DbManager',
-            'defaultRoles' => ['guest', 'user'],
+            'class'           => 'yii\rbac\DbManager',
+            'itemTable'       => 'auth_item',
+            'itemChildTable'  => 'auth_item_child',
+            'assignmentTable' => 'auth_assignment',
+            'ruleTable'       => 'auth_rule',
+            'defaultRoles'    => ['guest'],// роль которая назначается всем пользователям по умолчанию
         ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation

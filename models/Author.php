@@ -12,9 +12,22 @@ class Author extends ActiveRecord
      */
     public $users;
 
+    public $connection;
+
+
+
     public static function tableName()
     {
         return 'authors';
+    }
+
+    public function rules()
+    {
+        return [
+            ['full_name', 'filter', 'filter' => 'trim'],
+            [['full_name'], 'required'],
+            ['full_name', 'string', 'min' => 2, 'max' => 255],
+        ];
     }
 
     public function getBooks()
@@ -29,6 +42,7 @@ class Author extends ActiveRecord
 
     public function subscribe($user_id)
     {
+        $connection = \Yii::$app->db;
         $this->users->add($user_id);
     }
 

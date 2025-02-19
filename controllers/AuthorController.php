@@ -5,30 +5,24 @@ namespace app\controllers;
 use Yii;
 use app\models\search\AuthorSearch;
 use yii\data\ActiveDataProvider;
-use yii\filters\VerbFilter;
 use yii\web\Controller;
 use app\models\Author;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
 class AuthorController extends Controller
 {
-    /**
-     * @inheritDoc
-     */
-    public function behaviors()
+
+    public function beforeAction($action)
     {
-        return [
-            'access' => [
-                'class' => \yii\filters\AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['author/index', 'author/view', 'author/create', 'author/update',
-                            'author/delete', 'author/subscribe', 'author/unsubscribe'],
-                    ],
-                ],
-            ],
-        ];
+        if (parent::beforeAction($action)) {
+            if (!\Yii::$app->user->can('author/'. $action->id)) {
+                throw new ForbiddenHttpException('Access denied');
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -97,6 +91,7 @@ class AuthorController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

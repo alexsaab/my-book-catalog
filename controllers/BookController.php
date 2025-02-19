@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 use app\models\Book;
 use app\models\search\BookSearch;
@@ -11,19 +12,16 @@ use app\models\search\BookSearch;
 class BookController extends Controller
 {
 
-    public function behaviors()
+    public function beforeAction($action)
     {
-        return [
-            'access' => [
-                'class' => \yii\filters\AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['author/index', 'author/view', 'author/create', 'author/update', 'author/delete'],
-                    ],
-                ],
-            ],
-        ];
+        if (parent::beforeAction($action)) {
+            if (!\Yii::$app->user->can('book/'.$action->id)) {
+                throw new ForbiddenHttpException('Access denied');
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function actionIndex()

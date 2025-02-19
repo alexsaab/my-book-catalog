@@ -2,9 +2,21 @@
     <a href="https://github.com/yiisoft" target="_blank">
         <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
     </a>
-    <h1 align="center">Yii 2 Basic Project Template</h1>
+    <h1 align="center">Тест по задаче "Каталог Книг"</h1>
     <br>
 </p>
+
+Все реализовано на контейнере Docker (как видите есть файл `docker-compose.yml`).
+
+Запускаем первоначально команду `docker-compose up -d --build` и в браузере открываем `http://localhost:8000/`
+
+Потом заходим в контейнер php и выполняем миграции `php yii migrate`"
+
+У Админа пользователь с логином `admin` и паролем `admin`
+
+У Юзера пользователь с логином `user` и паролем `user`
+
+У Гостя пользователь с логином `guest` и паролем `guest`
 
 Yii 2 Basic Project Template is a skeleton [Yii 2](https://www.yiiframework.com/) application best for
 rapidly creating small projects.

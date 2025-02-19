@@ -29,6 +29,8 @@ class m250218_210609_add_roles_and_permissions extends Migration
         $authorDelete = $auth->createPermission('author/delete');
         $authorSubscribe = $auth->createPermission('author/subscribe');
         $authorUnsubscribe = $auth->createPermission('author/unsubscribe');
+        $authorReport = $auth->createPermission('author/top-authors-by-year');
+
 
         $bookIndex = $auth->createPermission('book/index');
         $bookView = $auth->createPermission('book/view');
@@ -44,6 +46,7 @@ class m250218_210609_add_roles_and_permissions extends Migration
         $auth->add($authorDelete);
         $auth->add($authorSubscribe);
         $auth->add($authorUnsubscribe);
+        $auth->add($authorReport);
 
         $auth->add($bookIndex);
         $auth->add($bookView);
@@ -57,6 +60,7 @@ class m250218_210609_add_roles_and_permissions extends Migration
         $auth->addChild($roleUser, $authorCreate);
         $auth->addChild($roleUser, $authorUpdate);
         $auth->addChild($roleUser, $authorDelete);
+        $auth->addChild($roleUser, $authorReport);
 
         $auth->addChild($roleUser, $bookIndex);
         $auth->addChild($roleUser, $bookView);
@@ -68,6 +72,7 @@ class m250218_210609_add_roles_and_permissions extends Migration
         $auth->addChild($roleGuest, $authorView);
         $auth->addChild($roleGuest, $authorSubscribe);
         $auth->addChild($roleGuest, $authorUnsubscribe);
+        $auth->addChild($roleGuest, $authorReport);
 
         $auth->addChild($roleGuest, $bookIndex);
         $auth->addChild($roleGuest, $bookView);
@@ -79,6 +84,7 @@ class m250218_210609_add_roles_and_permissions extends Migration
         $auth->addChild($roleAdmin, $authorDelete);
         $auth->addChild($roleAdmin, $authorSubscribe);
         $auth->addChild($roleAdmin, $authorUnsubscribe);
+        $auth->addChild($roleAdmin, $authorReport);
 
         $auth->addChild($roleAdmin, $bookIndex);
         $auth->addChild($roleAdmin, $bookView);
